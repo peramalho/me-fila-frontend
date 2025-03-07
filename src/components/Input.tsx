@@ -12,7 +12,7 @@ export function Input({ label, isError, errorMessage, id, ...rest }: Props) {
       </label>
       <input
         id={id}
-        className="bg-white text-[40px] text-black px-3 py-2 mt-1 rounded-md"
+        className="bg-white text-[40px] text-black px-3 py-2 mt-1 rounded-md w-full"
         {...rest}
       />
       {isError && errorMessage && (
