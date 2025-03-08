@@ -7,8 +7,8 @@ export function HomePage() {
     <Wrapper>
       <h1 className="text-6xl">Me Fila</h1>
       <div className="flex flex-col gap-5 w-full">
-        <ButtonLink to={ROUTES.CREATE}>Criar Fila</ButtonLink>
         <ButtonLink to={ROUTES.JOIN}>Entrar em Fila</ButtonLink>
+        <ButtonLink to={ROUTES.CREATE}>Criar Fila</ButtonLink>
       </div>
     </Wrapper>
   );
