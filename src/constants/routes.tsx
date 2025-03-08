@@ -1,5 +1,5 @@
 export enum ROUTES {
   HOME = "/",
-  CREATE = "/create",
+  HOST = "/host",
   JOIN = "/join",
 }

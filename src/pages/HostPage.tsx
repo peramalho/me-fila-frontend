@@ -6,7 +6,7 @@ import { ROUTES } from "../constants/routes";
 import { Button } from "../components/Button";
 import { ButtonGroup } from "../components/ButtonGroup";
 
-export function CreatePage() {
+export function HostPage() {
   const [queueName, setQueueName] = useState("");
   const [queueNameError, setQueueNameError] = useState(false);
 
