@@ -27,7 +27,7 @@ export function CreatePage() {
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-16">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-16 w-full">
         <Input
           id="queue-name"
           label="Nome da Fila"
@@ -36,7 +36,7 @@ export function CreatePage() {
           value={queueName}
           onChange={handleChange}
         />
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-5 w-full">
           <Button type="submit">Continuar</Button>
           <ButtonLink to={ROUTES.HOME}>Voltar</ButtonLink>
         </div>
