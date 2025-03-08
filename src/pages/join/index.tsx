@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Input } from "../components/Input";
-import { Wrapper } from "../components/Wrapper";
-import { ButtonLink } from "../components/ButtonLink";
-import { ROUTES } from "../constants/routes";
-import { Button } from "../components/Button";
-import { ButtonGroup } from "../components/ButtonGroup";
+import { Input } from "../../components/Input";
+import { Wrapper } from "../../components/Wrapper";
+import { ButtonLink } from "../../components/ButtonLink";
+import { ROUTES } from "../../constants/routes";
+import { Button } from "../../components/Button";
+import { ButtonGroup } from "../../components/ButtonGroup";
 
 export function JoinPage() {
   const [queueId, setQueueId] = useState("");

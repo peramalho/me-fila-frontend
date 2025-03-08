@@ -2,10 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
-import { HomePage } from "./pages/HomePage";
-import { HostPage } from "./pages/HostPage";
+import { HomePage } from "./pages/home";
+import { HostPage } from "./pages/host";
 import { ROUTES } from "./constants/routes";
-import { JoinPage } from "./pages/JoinPage";
+import { JoinPage } from "./pages/join";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
