@@ -28,6 +28,7 @@ export function CreatePage() {
 
   return (
     <Wrapper>
+      <h1 className="text-5xl">Criar Fila</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-16 w-full">
         <Input
           id="queue-name"
