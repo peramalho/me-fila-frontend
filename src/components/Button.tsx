@@ -1,13 +1,26 @@
 import clsx from "clsx";
+import Spinner from "../assets/spinner.svg";
 
-export function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  isLoading?: boolean;
+};
+
+export function Button({ isLoading, ...rest }: ButtonProps) {
+  if (isLoading) {
+    return (
+      <div className="bg-white rounded-md h-16 flex items-center justify-center">
+        <img src={Spinner} width={36} />
+      </div>
+    );
+  }
+
   return (
     <button
       className={clsx(
         "text-black text-center text-3xl cursor-pointer w-full",
-        "bg-white rounded-md hover:bg-gray-200 p-3"
+        "bg-white rounded-md hover:bg-gray-200 h-16 flex items-center justify-center"
       )}
-      {...props}
+      {...rest}
     />
   );
 }
