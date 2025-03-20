@@ -16,7 +16,7 @@ export function HostPage() {
 
   const { mutate, isPending, isError } = useCreateRoomMutation({
     onSuccess: (data) => {
-      navigate(ROUTES.HOST_ID.replace(":id", data.id));
+      navigate(ROUTES.HOST_ID.replace(":id", data.data.room.id));
     },
   });
 

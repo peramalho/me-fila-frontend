@@ -4,9 +4,9 @@ import { fetchData } from "./fetchData";
 import { Room } from "../types";
 
 export function useCreateRoomMutation(
-  options: UseMutationOptions<Room, Error, { name: string }>
+  options: UseMutationOptions<{ data: { room: Room } }, Error, { name: string }>
 ) {
-  return useMutation<Room, Error, { name: string }>({
+  return useMutation<{ data: { room: Room } }, Error, { name: string }>({
     ...options,
     mutationFn: ({ name }) =>
       fetchData({
