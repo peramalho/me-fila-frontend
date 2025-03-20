@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Input } from "../../components/Input";
 import { Wrapper } from "../../components/Wrapper";
 import { ButtonLink } from "../../components/ButtonLink";
 import { ROUTES } from "../../constants/routes";
 import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
+import { useCreateRoomMutation } from "../../api/roomApi";
 
 export function HostPage() {
   const [queueName, setQueueName] = useState("");
   const [queueNameError, setQueueNameError] = useState(false);
+  const navigate = useNavigate();
+
+  const { mutate, isPending, isError } = useCreateRoomMutation({
+    onSuccess: (data) => {
+      navigate(ROUTES.HOST_ID.replace(":id", data.id));
+    },
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueueName(event.target.value);
@@ -23,7 +32,7 @@ export function HostPage() {
       return;
     }
 
-    alert("queueName = " + queueName);
+    mutate({ name: queueName });
   };
 
   return (
@@ -39,9 +48,12 @@ export function HostPage() {
           onChange={handleChange}
         />
         <ButtonGroup>
-          <Button type="submit">Continuar</Button>
+          <Button type="submit" isLoading={isPending}>
+            Continuar
+          </Button>
           <ButtonLink to={ROUTES.HOME}>Voltar</ButtonLink>
         </ButtonGroup>
+        {isError && <p>Algo deu errado. Por favor tente novamente</p>}
       </form>
     </Wrapper>
   );
