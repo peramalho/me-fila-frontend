@@ -1,6 +1,6 @@
 import { getEnv } from "../env";
 
-const BACKEND_URL = getEnv("BACKEND_URL");
+const BACKEND_URL = getEnv("VITE_BACKEND_URL");
 
 export enum API_METHOD {
   GET = "GET",
