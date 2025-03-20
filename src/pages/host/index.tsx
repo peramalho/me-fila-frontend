@@ -7,6 +7,7 @@ import { ROUTES } from "../../constants/routes";
 import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
 import { useCreateRoomMutation } from "../../api/roomApi";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export function HostPage() {
   const [queueName, setQueueName] = useState("");
@@ -52,8 +53,12 @@ export function HostPage() {
             Continuar
           </Button>
           <ButtonLink to={ROUTES.HOME}>Voltar</ButtonLink>
+          {isError && (
+            <ErrorMessage>
+              Algo deu errado. Por favor tente novamente
+            </ErrorMessage>
+          )}
         </ButtonGroup>
-        {isError && <p>Algo deu errado. Por favor tente novamente</p>}
       </form>
     </Wrapper>
   );

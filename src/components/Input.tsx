@@ -16,7 +16,7 @@ export function Input({ label, isError, errorMessage, id, ...rest }: Props) {
         {...rest}
       />
       {isError && errorMessage && (
-        <p className="mt-2 text- text-red-400">{errorMessage}</p>
+        <p className="mt-2 text-lg text-red-400">{errorMessage}</p>
       )}
     </div>
   );
