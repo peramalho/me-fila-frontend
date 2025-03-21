@@ -9,3 +9,13 @@ export type Room = {
   name: string;
   participants: User[];
 };
+
+export type SuccessResponse<T> = {
+  data: T;
+  error: null;
+};
+
+export type ErrorResponse = {
+  data: null;
+  error: { message: string; code: number };
+};

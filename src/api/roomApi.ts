@@ -1,12 +1,21 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { API_METHOD, API_ROUTES } from "../constants/apiRoutes";
 import { fetchData } from "./fetchData";
-import { Room } from "../types";
+import { Room, SuccessResponse } from "../types";
+import { ErrorResponse } from "react-router";
 
 export function useCreateRoomMutation(
-  options: UseMutationOptions<{ data: { room: Room } }, Error, { name: string }>
+  options: UseMutationOptions<
+    SuccessResponse<{ room: Room }>,
+    ErrorResponse,
+    { name: string }
+  >
 ) {
-  return useMutation<{ data: { room: Room } }, Error, { name: string }>({
+  return useMutation<
+    SuccessResponse<{ room: Room }>,
+    ErrorResponse,
+    { name: string }
+  >({
     ...options,
     mutationFn: ({ name }) =>
       fetchData({
@@ -18,9 +27,13 @@ export function useCreateRoomMutation(
 }
 
 export function useDeleteRoomMutation(
-  options: UseMutationOptions<null, Error, { roomId: string }>
+  options: UseMutationOptions<
+    SuccessResponse<null>,
+    ErrorResponse,
+    { roomId: string }
+  >
 ) {
-  return useMutation<null, Error, { roomId: string }>({
+  return useMutation<SuccessResponse<null>, ErrorResponse, { roomId: string }>({
     ...options,
     mutationFn: ({ roomId }) =>
       fetchData({
