@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AuthContext } from "./contexts";
 import { HOST_TOKEN } from "../constants/localStorage";
 
 export type AuthContextType = {
   hostToken: string | null;
+  isAuthenticated: boolean;
   login: (hostToken: string) => void;
   logout: () => void;
 };
@@ -13,6 +14,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const storedHostToken: string | null = localStorage.getItem(HOST_TOKEN);
     return storedHostToken;
   });
+
+  const isAuthenticated = useMemo(() => Boolean(hostToken), [hostToken]);
 
   const login = useCallback((currentHostToken: string) => {
     localStorage.setItem(HOST_TOKEN, currentHostToken);
@@ -25,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ hostToken, login, logout }}>
+    <AuthContext.Provider value={{ hostToken, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

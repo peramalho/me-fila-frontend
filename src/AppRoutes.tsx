@@ -5,11 +5,10 @@ import { HostPage } from "./pages/host";
 import { JoinPage } from "./pages/join";
 import { HostIdPage } from "./pages/host/[id]";
 import { AuthContext } from "./providers/contexts";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 
 export function AppRoutes() {
-  const { hostToken } = useContext(AuthContext);
-  const isAuthenticated = useMemo(() => Boolean(hostToken), [hostToken]);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <BrowserRouter>
