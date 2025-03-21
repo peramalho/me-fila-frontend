@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 import { Wrapper } from "../../components/Wrapper";
 import { Button } from "../../components/Button";
 import { useDeleteRoomMutation } from "../../api/roomApi";
