@@ -4,15 +4,20 @@ import { HomePage } from "./pages/home";
 import { HostPage } from "./pages/host";
 import { JoinPage } from "./pages/join";
 import { HostIdPage } from "./pages/host/[id]";
+import { AuthContext } from "./providers/contexts";
+import { useContext, useMemo } from "react";
 
 export function AppRoutes() {
+  const { hostToken } = useContext(AuthContext);
+  const isAuthenticated = useMemo(() => Boolean(hostToken), [hostToken]);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.HOST}>
           <Route index element={<HostPage />} />
-          <Route path=":id" element={<HostIdPage />} />
+          {isAuthenticated && <Route path=":id" element={<HostIdPage />} />}
         </Route>
         <Route path={ROUTES.JOIN}>
           <Route index element={<JoinPage />} />
