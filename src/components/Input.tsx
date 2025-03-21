@@ -1,3 +1,5 @@
+import { ErrorMessage } from "./ErrorMessage";
+
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   isError?: boolean;
@@ -16,7 +18,7 @@ export function Input({ label, isError, errorMessage, id, ...rest }: Props) {
         {...rest}
       />
       {isError && errorMessage && (
-        <p className="mt-2 text-lg text-red-400">{errorMessage}</p>
+        <ErrorMessage className="mt-2">{errorMessage}</ErrorMessage>
       )}
     </div>
   );
