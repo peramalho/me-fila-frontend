@@ -6,7 +6,7 @@ export type AuthContextType = {
   hostToken: string | null;
   login: (hostToken: string) => void;
   logout: () => void;
-} | null;
+};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [hostToken, setHostToken] = useState<string | null>(() => {
