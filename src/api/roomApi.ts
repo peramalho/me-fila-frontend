@@ -4,17 +4,22 @@ import { fetchData } from "./fetchData";
 import { Room, SuccessResponse } from "../types";
 import { ErrorResponse } from "react-router";
 
+type useCreateRoomMutationSuccessResponse = SuccessResponse<{
+  room: Room;
+  hostToken: string;
+}>;
+type useCreateRoomMutationVariables = { name: string };
 export function useCreateRoomMutation(
   options: UseMutationOptions<
-    SuccessResponse<{ room: Room }>,
+    useCreateRoomMutationSuccessResponse,
     ErrorResponse,
-    { name: string }
+    useCreateRoomMutationVariables
   >
 ) {
   return useMutation<
-    SuccessResponse<{ room: Room }>,
+    useCreateRoomMutationSuccessResponse,
     ErrorResponse,
-    { name: string }
+    useCreateRoomMutationVariables
   >({
     ...options,
     mutationFn: ({ name }) =>
@@ -26,19 +31,26 @@ export function useCreateRoomMutation(
   });
 }
 
+type useDeleteRoomMutationSuccessResponse = SuccessResponse<null>;
+type useDeleteRoomMutationVariables = { roomId: string; hostToken: string };
 export function useDeleteRoomMutation(
   options: UseMutationOptions<
-    SuccessResponse<null>,
+    useDeleteRoomMutationSuccessResponse,
     ErrorResponse,
-    { roomId: string }
+    useDeleteRoomMutationVariables
   >
 ) {
-  return useMutation<SuccessResponse<null>, ErrorResponse, { roomId: string }>({
+  return useMutation<
+    useDeleteRoomMutationSuccessResponse,
+    ErrorResponse,
+    useDeleteRoomMutationVariables
+  >({
     ...options,
-    mutationFn: ({ roomId }) =>
+    mutationFn: ({ roomId, hostToken }) =>
       fetchData({
         url: API_ROUTES.ROOM_ID.replace(":id", roomId),
         method: API_METHOD.DELETE,
+        hostToken,
       }),
   });
 }
