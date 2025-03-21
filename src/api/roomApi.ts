@@ -10,7 +10,7 @@ type useCreateRoomMutationSuccessResponse = SuccessResponse<{
 }>;
 type useCreateRoomMutationVariables = { name: string };
 export function useCreateRoomMutation(
-  options: UseMutationOptions<
+  options?: UseMutationOptions<
     useCreateRoomMutationSuccessResponse,
     ErrorResponse,
     useCreateRoomMutationVariables
@@ -34,7 +34,7 @@ export function useCreateRoomMutation(
 type useDeleteRoomMutationSuccessResponse = SuccessResponse<null>;
 type useDeleteRoomMutationVariables = { roomId: string; hostToken: string };
 export function useDeleteRoomMutation(
-  options: UseMutationOptions<
+  options?: UseMutationOptions<
     useDeleteRoomMutationSuccessResponse,
     ErrorResponse,
     useDeleteRoomMutationVariables
