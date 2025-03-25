@@ -8,7 +8,23 @@ import { AuthContext } from "./providers/contexts";
 import { useContext } from "react";
 
 export function AppRoutes() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, hostToken } = useContext(AuthContext);
+
+  if (isAuthenticated && hostToken) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTES.HOST}>
+            <Route path=":id" element={<HostIdPage />} />
+          </Route>
+          <Route
+            path="*"
+            element={<Navigate to={ROUTES.HOST_ID.replace(":id", hostToken)} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -16,7 +32,6 @@ export function AppRoutes() {
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.HOST}>
           <Route index element={<HostPage />} />
-          {isAuthenticated && <Route path=":id" element={<HostIdPage />} />}
         </Route>
         <Route path={ROUTES.JOIN}>
           <Route index element={<JoinPage />} />
