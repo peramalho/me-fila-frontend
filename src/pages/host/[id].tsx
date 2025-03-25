@@ -18,7 +18,7 @@ export function HostIdPage() {
   });
 
   if (!id || !hostToken) {
-    return <Navigate to={ROUTES.HOME} />;
+    return <Navigate to={ROUTES.HOME} replace />;
   }
 
   const handleDeleteQueue = () => {
