@@ -16,7 +16,7 @@ export function HostForm() {
 
   const { mutate, isPending, isError } = useCreateRoomMutation({
     onSuccess: (data) => {
-      login(data.data.hostToken);
+      login({ hostToken: data.data.hostToken, roomId: data.data.room.id });
     },
   });
 

@@ -1,1 +1,4 @@
-export const HOST_TOKEN = "hostToken";
+export enum LocalStorage {
+  HOST_TOKEN = "hostToken",
+  ROOM_ID = "roomId",
+}

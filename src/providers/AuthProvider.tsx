@@ -1,29 +1,41 @@
 import { useCallback, useMemo, useState } from "react";
 import { AuthContext } from "./contexts";
-import { HOST_TOKEN } from "../constants/localStorage";
+import { LocalStorage } from "../constants/localStorage";
 
 export type AuthContextType = {
   hostToken: string | null;
   isAuthenticated: boolean;
-  login: (hostToken: string) => void;
+  login: ({ hostToken, roomId }: { hostToken: string; roomId: string }) => void;
   logout: () => void;
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [hostToken, setHostToken] = useState<string | null>(() => {
-    const storedHostToken: string | null = localStorage.getItem(HOST_TOKEN);
+    const storedHostToken: string | null = localStorage.getItem(
+      LocalStorage.HOST_TOKEN
+    );
     return storedHostToken;
   });
 
   const isAuthenticated = useMemo(() => Boolean(hostToken), [hostToken]);
 
-  const login = useCallback((currentHostToken: string) => {
-    localStorage.setItem(HOST_TOKEN, currentHostToken);
-    setHostToken(currentHostToken);
-  }, []);
+  const login = useCallback(
+    ({
+      hostToken: currentHostToken,
+      roomId,
+    }: {
+      hostToken: string;
+      roomId: string;
+    }) => {
+      localStorage.setItem(LocalStorage.HOST_TOKEN, currentHostToken);
+      localStorage.setItem(LocalStorage.ROOM_ID, roomId);
+      setHostToken(currentHostToken);
+    },
+    []
+  );
 
   const logout = useCallback(() => {
-    localStorage.removeItem(HOST_TOKEN);
+    localStorage.clear();
     setHostToken(null);
   }, []);
 
