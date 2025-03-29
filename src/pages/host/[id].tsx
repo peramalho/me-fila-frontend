@@ -22,7 +22,7 @@ export function HostIdPage() {
   }
 
   const handleDeleteQueue = () => {
-    mutate({ roomId: id, hostToken });
+    mutate({ hostToken });
   };
 
   return (

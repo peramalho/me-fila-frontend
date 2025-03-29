@@ -32,7 +32,7 @@ export function useCreateRoomMutation(
 }
 
 type useDeleteRoomMutationSuccessResponse = SuccessResponse<null>;
-type useDeleteRoomMutationVariables = { roomId: string; hostToken: string };
+type useDeleteRoomMutationVariables = { hostToken: string };
 export function useDeleteRoomMutation(
   options?: UseMutationOptions<
     useDeleteRoomMutationSuccessResponse,
@@ -46,9 +46,9 @@ export function useDeleteRoomMutation(
     useDeleteRoomMutationVariables
   >({
     ...options,
-    mutationFn: ({ roomId, hostToken }) =>
+    mutationFn: ({ hostToken }) =>
       fetchData({
-        url: API_ROUTES.ROOM_ID.replace(":id", roomId),
+        url: API_ROUTES.ROOM,
         method: API_METHOD.DELETE,
         hostToken,
       }),

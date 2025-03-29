@@ -11,5 +11,4 @@ export enum API_METHOD {
 
 export const API_ROUTES = {
   ROOM: BACKEND_URL + "/room",
-  ROOM_ID: BACKEND_URL + "/room/:id",
 };
