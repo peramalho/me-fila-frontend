@@ -1,15 +1,14 @@
-import { useContext } from "react";
 import { Navigate, useParams } from "react-router";
 import { Wrapper } from "../../components/Wrapper";
 import { Button } from "../../components/Button";
 import { useDeleteRoomMutation } from "../../api/roomApi";
-import { AuthContext } from "../../providers/contexts";
 import { ROUTES } from "../../constants/routes";
 import { ErrorMessage } from "../../components/ErrorMessage";
+import { useAuth } from "../../providers/useAuth";
 
 export function HostIdPage() {
   const { id } = useParams();
-  const { hostToken, logout } = useContext(AuthContext);
+  const { hostToken, logout } = useAuth();
 
   const { mutate, isPending, isError } = useDeleteRoomMutation({
     onSuccess: () => {

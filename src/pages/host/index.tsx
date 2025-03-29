@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Input } from "../../components/Input";
 import { Wrapper } from "../../components/Wrapper";
@@ -8,12 +8,12 @@ import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
 import { useCreateRoomMutation } from "../../api/roomApi";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { AuthContext } from "../../providers/contexts";
+import { useAuth } from "../../providers/useAuth";
 
 export function HostPage() {
   const [queueName, setQueueName] = useState("");
   const [queueNameError, setQueueNameError] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const { mutate, isPending, isError } = useCreateRoomMutation({

@@ -4,11 +4,10 @@ import { HomePage } from "./pages/home";
 import { HostPage } from "./pages/host";
 import { JoinPage } from "./pages/join";
 import { HostIdPage } from "./pages/host/[id]";
-import { AuthContext } from "./providers/contexts";
-import { useContext } from "react";
+import { useAuth } from "./providers/useAuth";
 
 export function AppRoutes() {
-  const { isAuthenticated, hostToken } = useContext(AuthContext);
+  const { isAuthenticated, hostToken } = useAuth();
 
   if (isAuthenticated && hostToken) {
     return (
