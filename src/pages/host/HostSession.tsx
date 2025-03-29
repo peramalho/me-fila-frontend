@@ -1,4 +1,4 @@
-import { Navigate, useParams } from "react-router";
+import { Navigate } from "react-router";
 import { Wrapper } from "../../components/Wrapper";
 import { Button } from "../../components/Button";
 import { useDeleteRoomMutation } from "../../api/roomApi";
@@ -6,8 +6,7 @@ import { ROUTES } from "../../constants/routes";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { useAuth } from "../../providers/useAuth";
 
-export function HostIdPage() {
-  const { id } = useParams();
+export function HostSession() {
   const { hostToken, logout } = useAuth();
 
   const { mutate, isPending, isError } = useDeleteRoomMutation({
@@ -21,7 +20,7 @@ export function HostIdPage() {
     },
   });
 
-  if (!id || !hostToken) {
+  if (!hostToken) {
     return <Navigate to={ROUTES.HOME} replace />;
   }
 
@@ -31,7 +30,6 @@ export function HostIdPage() {
 
   return (
     <Wrapper>
-      <p>ID da fila: {id}</p>
       <Button onClick={handleDeleteQueue} isLoading={isPending}>
         Deletar Fila
       </Button>

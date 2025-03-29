@@ -3,28 +3,8 @@ import { ROUTES } from "./constants/routes";
 import { HomePage } from "./pages/home";
 import { HostPage } from "./pages/host";
 import { JoinPage } from "./pages/join";
-import { HostIdPage } from "./pages/host/[id]";
-import { useAuth } from "./providers/useAuth";
 
 export function AppRoutes() {
-  const { isAuthenticated, hostToken } = useAuth();
-
-  if (isAuthenticated && hostToken) {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path={ROUTES.HOST}>
-            <Route path=":id" element={<HostIdPage />} />
-          </Route>
-          <Route
-            path="*"
-            element={<Navigate to={ROUTES.HOST_ID.replace(":id", hostToken)} />}
-          />
-        </Routes>
-      </BrowserRouter>
-    );
-  }
-
   return (
     <BrowserRouter>
       <Routes>
