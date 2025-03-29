@@ -1,8 +1,7 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { API_METHOD, API_ROUTES } from "../constants/apiRoutes";
 import { fetchData } from "./fetchData";
-import { Room, SuccessResponse } from "../types";
-import { ErrorResponse } from "react-router";
+import { Room, SuccessResponse, ErrorResponse } from "../types";
 
 type useCreateRoomMutationSuccessResponse = SuccessResponse<{
   room: Room;

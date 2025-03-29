@@ -15,6 +15,11 @@ export function HostIdPage() {
     onSuccess: () => {
       logout();
     },
+    onError: (error) => {
+      if (error.error.error.code === 404) {
+        logout();
+      }
+    },
   });
 
   if (!id || !hostToken) {
