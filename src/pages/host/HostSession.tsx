@@ -7,7 +7,7 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import { useAuth } from "../../providers/useAuth";
 
 export function HostSession() {
-  const { hostToken, logout } = useAuth();
+  const { hostToken, roomId, logout } = useAuth();
 
   const { mutate, isPending, isError } = useDeleteRoomMutation({
     onSuccess: () => {
@@ -20,7 +20,7 @@ export function HostSession() {
     },
   });
 
-  if (!hostToken) {
+  if (!hostToken || !roomId) {
     return <Navigate to={ROUTES.HOME} replace />;
   }
 
