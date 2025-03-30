@@ -10,18 +10,12 @@ export type AuthContextType = {
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [hostToken, setHostToken] = useState<string | null>(() => {
-    const storedHostToken: string | null = localStorage.getItem(
-      LocalStorage.HOST_TOKEN
-    );
-    return storedHostToken;
-  });
-  const [roomId, setRoomId] = useState<string | null>(() => {
-    const storedRoomId: string | null = localStorage.getItem(
-      LocalStorage.ROOM_ID
-    );
-    return storedRoomId;
-  });
+  const [hostToken, setHostToken] = useState<string | null>(
+    localStorage.getItem(LocalStorage.HOST_TOKEN)
+  );
+  const [roomId, setRoomId] = useState<string | null>(
+    localStorage.getItem(LocalStorage.ROOM_ID)
+  );
 
   const login = useCallback(
     ({
