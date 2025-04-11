@@ -5,17 +5,20 @@ export async function fetchData({
   method,
   body,
   hostToken,
+  userToken,
 }: {
   url: string;
   method: ApiMethod;
   body?: Record<string, unknown>;
   hostToken?: string;
+  userToken?: string;
 }) {
   const response = await fetch(url, {
     method,
     headers: {
       "Content-Type": "application/json",
       ...(hostToken ? { Authorization: `Bearer ${hostToken}` } : {}),
+      ...(userToken ? { Authorization: `Bearer ${userToken}` } : {}),
     },
     body: body ? JSON.stringify(body) : undefined,
   });
