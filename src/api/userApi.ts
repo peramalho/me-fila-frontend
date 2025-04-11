@@ -8,7 +8,7 @@ type useCreateUserMutationSuccessResponse = SuccessResponse<{
   userToken: string;
 }>;
 type useCreateUserMutationVariables = { name: string };
-export function useCreateRoomMutation(
+export function useCreateUserMutation(
   options?: UseMutationOptions<
     useCreateUserMutationSuccessResponse,
     ErrorResponse,
@@ -32,7 +32,7 @@ export function useCreateRoomMutation(
 
 type useDeleteUserMutationSuccessResponse = SuccessResponse<null>;
 type useDeleteUserMutationVariables = { userToken: string };
-export function useDeleteRoomMutation(
+export function useDeleteUserMutation(
   options?: UseMutationOptions<
     useDeleteUserMutationSuccessResponse,
     ErrorResponse,
