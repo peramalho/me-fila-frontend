@@ -4,6 +4,9 @@ import { AuthContextType } from "./AuthProvider";
 export const AuthContext = createContext<AuthContextType>({
   hostToken: null,
   roomId: null,
-  login: () => {},
+  loginHost: () => {},
+  userToken: null,
+  username: null,
+  loginUser: () => {},
   logout: () => {},
 });

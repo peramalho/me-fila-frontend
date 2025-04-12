@@ -12,11 +12,11 @@ import { useAuth } from "../../providers/useAuth";
 export function HostForm() {
   const [queueName, setQueueName] = useState("");
   const [queueNameError, setQueueNameError] = useState(false);
-  const { login } = useAuth();
+  const { loginHost } = useAuth();
 
   const { mutate, isPending, isError } = useCreateRoomMutation({
     onSuccess: (data) => {
-      login({ hostToken: data.data.hostToken, roomId: data.data.room.id });
+      loginHost({ hostToken: data.data.hostToken, roomId: data.data.room.id });
     },
   });
 

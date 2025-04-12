@@ -5,11 +5,23 @@ import { ButtonLink } from "../../components/ButtonLink";
 import { ROUTES } from "../../constants/routes";
 import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
+import { useCreateUserMutation } from "../../api/userApi";
+import { useAuth } from "../../providers/useAuth";
 
 export function JoinPage() {
   const [queueId, setQueueId] = useState("");
   const [queueIdError, setQueueIdError] = useState(false);
   const [username, setUsername] = useState("");
+  const { loginUser } = useAuth();
+
+  const { mutate, isPending, isError } = useCreateUserMutation({
+    onSuccess: (data) => {
+      loginUser({
+        userToken: data.data.userToken,
+        username: data.data.user.name,
+      });
+    },
+  });
 
   const handleChangeQueueId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueueId(event.target.value);
