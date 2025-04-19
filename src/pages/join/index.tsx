@@ -3,9 +3,9 @@ import { JoinForm } from "./JoinForm";
 import { JoinSession } from "./JoinSession";
 
 export function HostPage() {
-  const { hostToken } = useAuth();
+  const { userToken } = useAuth();
 
-  if (hostToken) {
+  if (userToken) {
     return <JoinSession />;
   }
 
