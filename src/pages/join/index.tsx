@@ -7,14 +7,15 @@ import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
 import { useCreateUserMutation } from "../../api/userApi";
 import { useAuth } from "../../providers/useAuth";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export function JoinPage() {
-  const [queueId, setQueueId] = useState("");
-  const [queueIdError, setQueueIdError] = useState(false);
+  const [roomId, setRoomId] = useState("");
+  const [roomIdError, setRoomIdError] = useState(false);
   const [username, setUsername] = useState("");
   const { loginUser } = useAuth();
 
-  const { mutate, isPending, isError } = useCreateUserMutation({
+  const { mutateAsync, isPending, isError } = useCreateUserMutation({
     onSuccess: (data) => {
       loginUser({
         userToken: data.data.userToken,
@@ -24,23 +25,23 @@ export function JoinPage() {
   });
 
   const handleChangeQueueId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQueueId(event.target.value);
-    setQueueIdError(false);
+    setRoomId(event.target.value);
+    setRoomIdError(false);
   };
 
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (queueId === "") {
-      setQueueIdError(true);
+    if (roomId === "") {
+      setRoomIdError(true);
       return;
     }
 
-    alert("queueId = " + queueId + "" + " | username = " + username);
+    await mutateAsync({ name: username });
   };
 
   return (
@@ -51,9 +52,9 @@ export function JoinPage() {
           <Input
             id="queue-id"
             label="ID da Fila"
-            isError={queueIdError}
+            isError={roomIdError}
             errorMessage="Insira um id por favor"
-            value={queueId}
+            value={roomId}
             onChange={handleChangeQueueId}
           />
           <Input
@@ -64,8 +65,15 @@ export function JoinPage() {
           />
         </div>
         <ButtonGroup>
-          <Button type="submit">Continuar</Button>
+          <Button type="submit" isLoading={isPending}>
+            Continuar
+          </Button>
           <ButtonLink to={ROUTES.HOME}>Voltar</ButtonLink>
+          {isError && (
+            <ErrorMessage>
+              Algo deu errado. Por favor tente novamente
+            </ErrorMessage>
+          )}
         </ButtonGroup>
       </form>
     </Wrapper>

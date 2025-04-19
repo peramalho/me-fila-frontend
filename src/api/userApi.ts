@@ -53,3 +53,27 @@ export function useDeleteUserMutation(
       }),
   });
 }
+
+type useJoinRoomMutationSuccessResponse = SuccessResponse<User>;
+type useJoinRoomMutationVariables = { roomId: string };
+export function useJoinRoomMutation(
+  options?: UseMutationOptions<
+    useJoinRoomMutationSuccessResponse,
+    ErrorResponse,
+    useJoinRoomMutationVariables
+  >
+) {
+  return useMutation<
+    useJoinRoomMutationSuccessResponse,
+    ErrorResponse,
+    useJoinRoomMutationVariables
+  >({
+    ...options,
+    mutationFn: ({ roomId }) =>
+      fetchData({
+        url: API_ROUTES.USER_JOIN,
+        method: API_METHOD.DELETE,
+        body: { roomId },
+      }),
+  });
+}
