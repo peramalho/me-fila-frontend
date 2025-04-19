@@ -72,7 +72,7 @@ export function useJoinRoomMutation(
     mutationFn: ({ roomId }) =>
       fetchData({
         url: API_ROUTES.USER_JOIN,
-        method: API_METHOD.DELETE,
+        method: API_METHOD.PATCH,
         body: { roomId },
       }),
   });
