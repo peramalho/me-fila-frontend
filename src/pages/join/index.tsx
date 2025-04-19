@@ -5,7 +5,7 @@ import { ButtonLink } from "../../components/ButtonLink";
 import { ROUTES } from "../../constants/routes";
 import { Button } from "../../components/Button";
 import { ButtonGroup } from "../../components/ButtonGroup";
-import { useCreateUserMutation } from "../../api/userApi";
+import { useCreateUserMutation, useJoinRoomMutation } from "../../api/userApi";
 import { useAuth } from "../../providers/useAuth";
 import { ErrorMessage } from "../../components/ErrorMessage";
 
@@ -15,11 +15,21 @@ export function JoinPage() {
   const [username, setUsername] = useState("");
   const { loginUser } = useAuth();
 
-  const { mutateAsync, isPending, isError } = useCreateUserMutation({
+  const {
+    mutateAsync: createUserMutateAsync,
+    isPending: createUserMutateIsPending,
+    isError: createUserMutateIsError,
+  } = useCreateUserMutation();
+
+  const {
+    mutateAsync: joinRoomMutateAsync,
+    isPending: joinRoomMutateIsPending,
+    isError: joinRoomMutateIsError,
+  } = useJoinRoomMutation({
     onSuccess: (data) => {
       loginUser({
-        userToken: data.data.userToken,
-        username: data.data.user.name,
+        userToken: data.data.id,
+        username: data.data.name,
       });
     },
   });
@@ -41,7 +51,8 @@ export function JoinPage() {
       return;
     }
 
-    await mutateAsync({ name: username });
+    const user = await createUserMutateAsync({ name: username });
+    await joinRoomMutateAsync({ roomId: user.data.user.participatedRoomId });
   };
 
   return (
@@ -65,11 +76,14 @@ export function JoinPage() {
           />
         </div>
         <ButtonGroup>
-          <Button type="submit" isLoading={isPending}>
+          <Button
+            type="submit"
+            isLoading={createUserMutateIsPending || joinRoomMutateIsPending}
+          >
             Continuar
           </Button>
           <ButtonLink to={ROUTES.HOME}>Voltar</ButtonLink>
-          {isError && (
+          {(createUserMutateIsError || joinRoomMutateIsError) && (
             <ErrorMessage>
               Algo deu errado. Por favor tente novamente
             </ErrorMessage>
