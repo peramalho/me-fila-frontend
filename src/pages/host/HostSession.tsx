@@ -49,9 +49,13 @@ export function HostSession() {
       <Button onClick={handleDeleteQueue} isLoading={isDeleteRoomPending}>
         Deletar Fila
       </Button>
-      {roomData?.data.participants.map((item) => (
-        <p>{item.name}</p>
-      ))}
+      {roomData ? (
+        roomData.data.participants.length ? (
+          roomData?.data.participants.map((item) => <p>{item.name}</p>)
+        ) : (
+          <p>A lista está vazia</p>
+        )
+      ) : null}
       {isGetRoomError ||
         (isDeleteRoomError && (
           <ErrorMessage>
