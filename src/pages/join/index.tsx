@@ -2,7 +2,7 @@ import { useAuth } from "../../providers/useAuth";
 import { JoinForm } from "./JoinForm";
 import { JoinSession } from "./JoinSession";
 
-export function HostPage() {
+export function JoinPage() {
   const { userToken } = useAuth();
 
   if (userToken) {

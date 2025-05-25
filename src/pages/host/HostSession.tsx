@@ -30,6 +30,7 @@ export function HostSession() {
 
   return (
     <Wrapper>
+      Id da fila: {roomId}
       <Button onClick={handleDeleteQueue} isLoading={isPending}>
         Deletar Fila
       </Button>
