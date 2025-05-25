@@ -52,7 +52,10 @@ export function JoinForm() {
     }
 
     const user = await createUserMutateAsync({ name: username });
-    await joinRoomMutateAsync({ roomId: user.data.user.participatedRoomId });
+    await joinRoomMutateAsync({
+      userToken: user.data.userToken,
+      roomId,
+    });
   };
 
   return (

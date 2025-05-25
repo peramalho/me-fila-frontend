@@ -55,7 +55,7 @@ export function useDeleteUserMutation(
 }
 
 type useJoinRoomMutationSuccessResponse = SuccessResponse<User>;
-type useJoinRoomMutationVariables = { roomId: string };
+type useJoinRoomMutationVariables = { userToken: string; roomId: string };
 export function useJoinRoomMutation(
   options?: UseMutationOptions<
     useJoinRoomMutationSuccessResponse,
@@ -69,11 +69,12 @@ export function useJoinRoomMutation(
     useJoinRoomMutationVariables
   >({
     ...options,
-    mutationFn: ({ roomId }) =>
+    mutationFn: ({ userToken, roomId }) =>
       fetchData({
         url: API_ROUTES.USER_JOIN,
         method: API_METHOD.PATCH,
         body: { roomId },
+        userToken,
       }),
   });
 }
