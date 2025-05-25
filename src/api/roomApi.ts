@@ -10,7 +10,7 @@ import { Room, SuccessResponse, ErrorResponse } from "../types";
 
 const GET_ROOM_QUERY_KEY = "get-room-query-key";
 
-type useGetRoomQuerySuccessResponse = SuccessResponse<Room>;
+type useGetRoomQuerySuccessResponse = SuccessResponse<{ room: Room }>;
 export function useGetRoomQuery(
   hostToken: string,
   options?: UseQueryOptions<useGetRoomQuerySuccessResponse, ErrorResponse>

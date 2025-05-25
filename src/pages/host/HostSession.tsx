@@ -50,8 +50,10 @@ export function HostSession() {
         Deletar Fila
       </Button>
       {roomData ? (
-        roomData.data.participants.length ? (
-          roomData?.data.participants.map((item) => <p>{item.name}</p>)
+        roomData.data.room.participants.length > 0 ? (
+          roomData?.data.room.participants.map((item) => (
+            <p key={item.id}>{item.name}</p>
+          ))
         ) : (
           <p>A lista está vazia</p>
         )
