@@ -1,7 +1,31 @@
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { API_METHOD, API_ROUTES } from "../constants/apiRoutes";
 import { fetchData } from "./fetchData";
 import { Room, SuccessResponse, ErrorResponse } from "../types";
+
+const GET_ROOM_QUERY_KEY = "get-room-query-key";
+
+type useGetRoomQuerySuccessResponse = SuccessResponse<Room>;
+export function useGetRoomQuery(
+  hostToken: string,
+  options?: UseQueryOptions<useGetRoomQuerySuccessResponse, ErrorResponse>
+) {
+  return useQuery<useGetRoomQuerySuccessResponse, ErrorResponse>({
+    ...options,
+    queryKey: [GET_ROOM_QUERY_KEY, hostToken],
+    queryFn: () =>
+      fetchData({
+        url: API_ROUTES.ROOM,
+        method: API_METHOD.GET,
+        hostToken,
+      }),
+  });
+}
 
 type useCreateRoomMutationSuccessResponse = SuccessResponse<{
   room: Room;
